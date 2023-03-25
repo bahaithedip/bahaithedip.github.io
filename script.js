@@ -163,7 +163,7 @@ var hash = getParameterByName('source');
 console.log(hash)
 
   const img = new Image();
-  hash ? img.src = 'https://ipfs.io/ipfs/' + hash + '/' : img.src = 'https://www.vaporwave.farm/static/media/vwaveSpin.ee33339a.gif';
+  img.src = 'https://ipfs.io/ipfs/' + hash + '/';
   // img.src = 'https://www.vaporwave.farm/static/media/vwaveSpin.ee33339a.gif';
   img.crossOrigin = 'Anonymous';
 
