@@ -148,8 +148,22 @@ function setupScene() {
   const itemGeo = new THREE.PlaneGeometry(9, 2.1);
   const itemMaterial = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.7 });
 
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+var hash = getParameterByName('source');
+
+console.log(hash)
+
   const img = new Image();
-  img.src = 'https://www.vaporwave.farm/static/media/vwaveSpin.ee33339a.gif';
+  hash ? img.src = 'ipfs://' + hash + '/' : img.src = 'https://www.vaporwave.farm/static/media/vwaveSpin.ee33339a.gif';
   img.crossOrigin = 'Anonymous';
 
   img.onload = function () {
