@@ -103,7 +103,7 @@ const getImageTexture = (image, density = 1) => {
 
   canvas.setAttribute('width', width * density);
   canvas.setAttribute('height', height * density);
-  canvas.style.width = `${width}px`;
+  canvas.style.width = `${width + 10000}px`;
   canvas.style.height = `${height}px`;
 
   ctx.drawImage(image, 0, 0, width * density, height * density);
@@ -131,6 +131,9 @@ occRenderTarget,
 lightSource,
 vlShaderUniforms;
 
+// const originalAspectRatio = 1 / 1;
+// const newHeight = Math.floor(width / originalAspectRatio);
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({
@@ -145,7 +148,7 @@ function setupScene() {
   lightSource.position.y = -15;
   lightSource.position.z = -15;
 
-  const itemGeo = new THREE.PlaneGeometry(9, 2.1);
+  const itemGeo = new THREE.PlaneGeometry(9, 4); // 4 changed from 2.1
   const itemMaterial = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.7 });
 
   function getParameterByName(name, url) {
@@ -156,11 +159,11 @@ function setupScene() {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
+  }
 
-var hash = getParameterByName('source');
+  var hash = getParameterByName('source');
 
-console.log(hash)
+  console.log(hash)
 
   const img = new Image();
   img.src = 'https://ipfs.io/ipfs/' + hash + '/';
